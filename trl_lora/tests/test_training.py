@@ -20,7 +20,7 @@ def test_grpo_updates_only_lora_and_saves_adapter(tmp_path: Path) -> None:
     vocabulary = {"[PAD]": 0, "[EOS]": 1, "[UNK]": 2, **{str(i): i + 3 for i in range(29)}}
     backend = Tokenizer(WordLevel(vocabulary, unk_token="[UNK]"))
     backend.pre_tokenizer = Whitespace()
-    tokenizer = PreTrainedTokenizerFast(tokenizer_object=backend, pad_token="[PAD]", eos_token="[EOS]", unk_token="[UNK]", padding_side="left")
+    tokenizer = PreTrainedTokenizerFast(tokenizer_object=backend, pad_token="[PAD]", eos_token="[EOS]", unk_token="[UNK]", padding_side="left", model_input_names=["input_ids", "attention_mask"])
 
     model = Qwen2ForCausalLM(Qwen2Config(vocab_size=32, hidden_size=32, intermediate_size=64, num_hidden_layers=1, num_attention_heads=2, num_key_value_heads=2, max_position_embeddings=512, pad_token_id=0, eos_token_id=1, bos_token_id=1))
     dataset = Dataset.from_dict({"nums": [[2, 3], [3, 4]], "target": [5, 7]}).map(make_prompt)

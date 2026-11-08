@@ -3,24 +3,7 @@ import pytest
 from countdown import countdown_reward, make_prompt, score
 
 
-@pytest.mark.parametrize(("completion", "numbers", "target", "expected"), [
-    ("<answer>(2 + 3) * 4</answer>", [2, 3, 4], 20, 1.0),
-    ("<answer>2 + 3 + 4</answer>", [2, 3, 4], 20, 0.1),
-    ("The answer is 20.", [2, 3, 4], 20, 0.0),
-    ("<answer>2 + 2 + 4</answer>", [2, 3, 4], 8, 0.1),
-    ("<answer>2 * 2 + 3</answer>", [2, 2, 3], 7, 1.0),
-    ("<answer>6 / (3 - 1)</answer>", [6, 3, 1], 3, 1.0),
-    ("<answer>-2 + 3 + 4</answer>", [2, 3, 4], 5, 1.0),
-    ("<answer>2 / (3 - 3)</answer>", [2, 3, 3], 0, 0.1),
-    ("<answer>2 ** 3</answer>", [2, 3], 8, 0.1),
-    ("<answer>3 // 2</answer>", [3, 2], 1, 0.1),
-    ("<answer>2.0 + 3</answer>", [2, 0, 3], 5, 0.1),
-    ("<answer>abs(2 - 3)</answer>", [2, 3], 1, 0.1),
-    ("<answer>(2 + 3</answer>", [2, 3], 5, 0.1),
-    ("<answer>2 + 3 = 5</answer>", [2, 3, 5], 5, 0.1),
-    ("<answer>\n2 + 3\n</answer>", [2, 3], 5, 1.0),
-    ("<answer>2 - 3</answer>\n<answer>2 + 3</answer>", [2, 3], 5, 1.0),
-])
+@pytest.mark.parametrize(("completion", "numbers", "target", "expected"), [ ("<answer>(2 + 3) * 4</answer>", [2, 3, 4], 20, 1.0), ("<answer>2 + 3 + 4</answer>", [2, 3, 4], 20, 0.1), ("The answer is 20.", [2, 3, 4], 20, 0.0), ("<answer>2 + 2 + 4</answer>", [2, 3, 4], 8, 0.1), ("<answer>2 * 2 + 3</answer>", [2, 2, 3], 7, 1.0), ("<answer>6 / (3 - 1)</answer>", [6, 3, 1], 3, 1.0), ("<answer>-2 + 3 + 4</answer>", [2, 3, 4], 5, 1.0), ("<answer>2 / (3 - 3)</answer>", [2, 3, 3], 0, 0.1), ("<answer>2 ** 3</answer>", [2, 3], 8, 0.1), ("<answer>3 // 2</answer>", [3, 2], 1, 0.1), ("<answer>2.0 + 3</answer>", [2, 0, 3], 5, 0.1), ("<answer>abs(2 - 3)</answer>", [2, 3], 1, 0.1), ("<answer>(2 + 3</answer>", [2, 3], 5, 0.1), ("<answer>2 + 3 = 5</answer>", [2, 3, 5], 5, 0.1), ("<answer>\n2 + 3\n</answer>", [2, 3], 5, 1.0), ("<answer>2 - 3</answer>\n<answer>2 + 3</answer>", [2, 3], 5, 1.0), ])
 def test_reward(completion: str, numbers: list[int], target: int, expected: float) -> None:
     assert score(completion, numbers, target) == expected
 

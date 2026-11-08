@@ -41,7 +41,6 @@ def train(output_dir: str = "outputs/countdown", max_steps: int = 1000, max_comp
     trainer.log_metrics("eval", metrics)
     trainer.save_metrics("eval", metrics)
     trainer.save_model(f"{output_dir}/adapter")
-    tokenizer.save_pretrained(f"{output_dir}/adapter")
 
 
 def main() -> None:
