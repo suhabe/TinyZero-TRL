@@ -50,3 +50,4 @@ def test_grpo_updates_only_lora_and_saves_adapter(tmp_path: Path) -> None:
     trainer.save_model(str(tmp_path / "adapter"))
     assert (tmp_path / "adapter" / "adapter_config.json").is_file()
     assert (tmp_path / "adapter" / "adapter_model.safetensors").is_file()
+    assert (tmp_path / "adapter" / "tokenizer.json").is_file()
