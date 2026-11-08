@@ -1,0 +1,6 @@
+[tool.mypy]
+python_version = "3.12"
+check_untyped_defs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+files = ["train.py", "modal_train.py", "test_train.py"]
