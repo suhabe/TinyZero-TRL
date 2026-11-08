@@ -1,0 +1,33 @@
+name: Checks
+
+on:
+  push:
+    branches: ["codex/**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      HF_HUB_OFFLINE: "1"
+      TOKENIZERS_PARALLELISM: "false"
+    defaults:
+      run:
+        working-directory: trl_lora
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: trl_lora/requirements*.txt
+      - run: pip install torch==2.8.0 --index-url https://download.pytorch.org/whl/cpu
+      - run: pip install -r requirements-dev.txt
+      - run: pytest -q
+      - run: mypy countdown.py train.py modal_train.py
+      - run: python train.py --help
+      - run: python -c "import modal_train"

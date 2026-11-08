@@ -95,3 +95,7 @@ python -m mypy
 ```
 
 The tests exercise Countdown scoring, GAE, PPO clipping, response-token alignment, and actual actor/critic optimization with a tiny randomly initialized Qwen model. They require no model or dataset downloads.
+
+## TRL and PEFT LoRA version
+
+See [trl_lora/](trl_lora/) for a minimal TRL GRPO adaptation with `Qwen/Qwen2.5-3B`, a PEFT LoRA adapter, and its own Modal runner. It preserves the Countdown prompt and reward while replacing PPO's learned critic with group-relative advantages.

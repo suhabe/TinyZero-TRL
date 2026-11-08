@@ -1,0 +1,16 @@
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["torch.*", "transformers.*", "trl.*", "peft.*", "datasets.*"]
+follow_imports = "skip"
+
+[[tool.mypy.overrides]]
+module = ["modal.*"]
+follow_imports = "silent"
