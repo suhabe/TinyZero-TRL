@@ -11,10 +11,7 @@ class CountdownRow(TypedDict):
 
 
 def make_prompt(row: CountdownRow) -> dict[str, str]:
-    prompt = f"""A conversation between User and Assistant. The user asks a question, and the Assistant solves it. The assistant first thinks about the reasoning process in the mind and then provides the user with the answer.
-User: Using the numbers {row["nums"]}, create an equation that equals {row["target"]}. You can use basic arithmetic operations (+, -, *, /) and each number can only be used once. Show your work in <think> </think> tags. And return the final answer in <answer> </answer> tags, for example <answer> (1 + 2) / 3 </answer>.
-Assistant: Let me solve this step by step.
-<think>"""
+    prompt = f"A conversation between User and Assistant. The user asks a question, and the Assistant solves it. The assistant first thinks about the reasoning process in the mind and then provides the user with the answer.\nUser: Using the numbers {row['nums']}, create an equation that equals {row['target']}. You can use basic arithmetic operations (+, -, *, /) and each number can only be used once. Show your work in <think> </think> tags. And return the final answer in <answer> </answer> tags, for example <answer> (1 + 2) / 3 </answer>.\nAssistant: Let me solve this step by step.\n<think>"
     return {"prompt": prompt}
 
 
